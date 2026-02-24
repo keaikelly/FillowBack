@@ -1,4 +1,4 @@
-package org.example.fillow;
+package com.fillow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
