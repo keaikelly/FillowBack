@@ -62,5 +62,13 @@ public class Simulation {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "margin_rate", nullable = false)
+    private Long marginRate;
+
+    @Column(name = "monthly_profit", nullable = false)
+    private Long monthlyProfit;
+
+    @Column(name = "breakeven", nullable = false)
+    private Long breakeven;
 
 }
