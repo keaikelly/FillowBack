@@ -27,7 +27,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     @Column(name = "user_id")
-    private Long id;
+    private Long userId;
 
     @Column(name = "login_id", nullable = false, length = 255)
     private String loginId;
@@ -41,7 +41,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 255)
     private String password; // 해시 저장
 
-    //어케 작동?
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
