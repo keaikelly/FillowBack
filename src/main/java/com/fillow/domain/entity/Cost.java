@@ -24,7 +24,7 @@ public class Cost {
     // Simulation(1) : cost(N)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "simul_id", nullable = false)
-    private Simulation simulation;
+    private Simulation simulId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "cost_type", nullable = false)
