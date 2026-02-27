@@ -9,7 +9,7 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product, Long> {
 
     //userId 기반 유저가 등록한 모든 상품 조회
-    List<Product> findByUserId(Long userId);
+    List<Product> findByUserUserId(Long userId);
 
     //상품명으로 조회
     List<Product> findByProductName(String productName);

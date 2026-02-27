@@ -23,8 +23,8 @@ public class Cost {
 
     // Simulation(1) : cost(N)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "simul_id", nullable = false)
-    private Simulation simulId;
+    @JoinColumn(name = "simul_id", nullable = false) //fk 컬럼
+    private Simulation simulation; //연결할 엔티티 의미
 
     @Enumerated(EnumType.STRING)
     @Column(name = "cost_type", nullable = false)
