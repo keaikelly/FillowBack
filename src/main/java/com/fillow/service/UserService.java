@@ -1,5 +1,6 @@
 package com.fillow.service;
 
+import com.fillow.app.dto.UserDto;
 import com.fillow.domain.entity.User;
 import com.fillow.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -15,22 +16,22 @@ public class UserService {
 
     //회원가입
     @Transactional
-    public User register(String loginId, String password, String name, String email ) {
+    public User register(UserDto.UserRegisterRequest request) {
 
         //중복체크
-        if(userRepo.existsByLoginId(loginId)) {
+        if(userRepo.existsByLoginId(request.getLoginId())) {
             throw new IllegalArgumentException("이미 사용중인 id입니다.");
         }
-        if(userRepo.existsByEmail(email)){
+        if(userRepo.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("이미 사용중인 email입니다.");
         }
 
         //객체 생성
         User user = User.builder()
-                .loginId(loginId)
-                .password(password)
-                .name(name)
-                .email(email)
+                .loginId(request.getLoginId())
+                .password(request.getPassword())
+                .name(request.getName())
+                .email(request.getEmail())
                 .build();
         return userRepo.save(user);
     }
@@ -40,5 +41,4 @@ public class UserService {
         return userRepo.findByLoginId(loginId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 아이디의 유저 없음"));
     }
-
 }
