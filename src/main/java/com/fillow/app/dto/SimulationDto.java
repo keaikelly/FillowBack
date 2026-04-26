@@ -46,27 +46,24 @@ public class SimulationDto {
         private Long marginRate;
         private Long monthlyProfit;
         private Long breakeven;
+
+        public static SimulationResponse from(Simulation simulation) {
+            return SimulationResponse.builder()
+                    .simulId(simulation.getSimulId())
+                    .productId(simulation.getProduct().getProductId())
+                    .simulName(simulation.getSimulName())
+                    .sellPrice(simulation.getSellPrice())
+                    .channel(simulation.getChannel())
+                    .platform(simulation.getPlatform())
+                    .tax(simulation.getTax())
+                    .commision(simulation.getCommission())
+                    .location(simulation.getLocation())
+                    .deposit(simulation.getDeposit())
+                    .rent(simulation.getRent())
+                    .marginRate(simulation.getMarginRate())
+                    .monthlyProfit(simulation.getMonthlyProfit())
+                    .breakeven(simulation.getBreakeven())
+                    .build();
+        }
     }
-
-    public static SimulationResponse from(Simulation simulation) {
-        return SimulationResponse.builder()
-                .simulId(simulation.getSimulId())
-                .productId(simulation.getProduct().getProductId())
-                .simulName(simulation.getSimulName())
-                .sellPrice(simulation.getSellPrice())
-                .channel(simulation.getChannel())
-                .platform(simulation.getPlatform())
-                .tax(simulation.getTax())
-                .commision(simulation.getCommission())
-                .location(simulation.getLocation())
-                .deposit(simulation.getDeposit())
-                .rent(simulation.getRent())
-                .marginRate(simulation.getMarginRate())
-                .monthlyProfit(simulation.getMonthlyProfit())
-                .breakeven(simulation.getBreakeven())
-                .build();
-    }
-
-
-
 }
