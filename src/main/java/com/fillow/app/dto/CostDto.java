@@ -14,7 +14,7 @@ public class CostDto {
     @Getter
     @NoArgsConstructor
     public static class CostCreateRequest {
-        private Long SimulId;
+        private Long simulId;
         private CostType costType;
         private String costName;
         private BigDecimal amount;
