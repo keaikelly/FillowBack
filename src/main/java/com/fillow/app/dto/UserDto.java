@@ -17,7 +17,15 @@ public class UserDto {
         private String email;
     }
 
-    //User 관련 응답
+    //로그인 요청
+    @Getter
+    @NoArgsConstructor
+    public static class UserLoginRequest {
+        private String loginId;
+        private String password;
+    }
+
+    // 로그인 응답
     @Getter
     @Builder
     public static class UserResponse{
@@ -25,6 +33,8 @@ public class UserDto {
         private String loginId;
         private String name;
         private String email;
+        // 나중에 JWT 붙이면 여기 추가
+        // private String accessToken;
 
         public static UserResponse from(User user) {
             //User 엔티티를 Dto로 변환하는 함수

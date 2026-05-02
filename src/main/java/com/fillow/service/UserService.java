@@ -36,9 +36,15 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    // loginId로 조회
-    public User findByLoginId(String loginId){
-        return userRepo.findByLoginId(loginId)
-                .orElseThrow(()-> new IllegalArgumentException("해당 아이디의 유저 없음"));
+    // loginId로 로그인
+    public User login(UserDto.UserLoginRequest request){
+
+        User user = userRepo.findByLoginId(request.getLoginId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
+
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+        return user;
     }
 }

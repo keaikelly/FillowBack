@@ -2,6 +2,7 @@ package com.fillow.app.controller;
 
 import com.fillow.app.dto.UserDto;
 import com.fillow.domain.entity.User;
+import com.fillow.repository.UserRepo;
 import com.fillow.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,11 @@ public class UserController {
         return UserDto.UserResponse.from(savedUser);
     }
 
-    //loginId로 조회
-    @GetMapping("/login/{loginId}")
-    public UserDto.UserResponse findByLoginId(@PathVariable String loginId){
-        User user=userService.findByLoginId(loginId);
+    // 로그인
+    @PostMapping("/login")
+    public UserDto.UserResponse login(@RequestBody UserDto.UserLoginRequest request) {
+        User user = userService.login(request);
         return UserDto.UserResponse.from(user);
     }
+
 }
