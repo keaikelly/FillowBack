@@ -4,6 +4,7 @@ import com.fillow.app.dto.UserDto;
 import com.fillow.domain.entity.User;
 import com.fillow.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class UserService {
     private final UserRepo userRepo; //UserRepo로 DB 작업. 변경X
+    private final BCryptPasswordEncoder passwordEncoder;
 
     //회원가입
     @Transactional
@@ -29,7 +31,7 @@ public class UserService {
         //객체 생성
         User user = User.builder()
                 .loginId(request.getLoginId())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
                 .email(request.getEmail())
                 .build();
@@ -42,7 +44,7 @@ public class UserService {
         User user = userRepo.findByLoginId(request.getLoginId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디입니다."));
 
-        if (!user.getPassword().equals(request.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         return user;
