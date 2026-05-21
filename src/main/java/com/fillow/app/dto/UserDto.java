@@ -17,6 +17,26 @@ public class UserDto {
         private String email;
     }
 
+    //회원가입+조회 응답
+    @Getter
+    @Builder
+    public static class UserResponse {
+        private Long userId;
+        private String loginId;
+        private String name;
+        private String email;
+
+        public static UserResponse from(User user) {
+            return UserResponse.builder()
+                    .userId(user.getUserId())
+                    .loginId(user.getLoginId())
+                    .name(user.getName())
+                    .email(user.getEmail())
+                    .build();
+        }
+
+    }
+
     //로그인 요청
     @Getter
     @NoArgsConstructor
@@ -28,21 +48,21 @@ public class UserDto {
     // 로그인 응답
     @Getter
     @Builder
-    public static class UserResponse{
+    public static class UserLoginResponse{
         private Long userId;
         private String loginId;
         private String name;
         private String email;
-        // 나중에 JWT 붙이면 여기 추가
-        // private String accessToken;
+        private String accessToken;
 
-        public static UserResponse from(User user) {
+        public static UserLoginResponse from(User user, String accessToken) {
             //User 엔티티를 Dto로 변환하는 함수
-            return UserResponse.builder()
+            return UserLoginResponse.builder()
                     .userId(user.getUserId())
                     .loginId(user.getLoginId())
                     .name(user.getName())
                     .email(user.getEmail())
+                    .accessToken(accessToken)
                     .build();
         }
     }
