@@ -49,4 +49,10 @@ public class UserService {
         }
         return user;
     }
+
+    // loginId로 정보조회
+    public User getInfo(String loginId) {
+        return userRepo.findByLoginId(loginId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아이디"));
+    }
 }
