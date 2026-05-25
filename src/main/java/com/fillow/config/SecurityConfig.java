@@ -26,6 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) //jwt이므로 csrf 허용제거
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )//jwt이므로 세션 저장 없음
@@ -52,7 +53,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:3000", //로컬
-                "https://financialflow.netlify.app/plan" //배포프론트
+                "https://financialflow.netlify.app" //배포프론트
         ));
 
         config.setAllowedMethods(List.of(
